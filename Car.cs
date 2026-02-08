@@ -19,8 +19,8 @@ public abstract class Car:ICar // класс отвечает за реализ�
     public string Color { get; }
     private readonly string _vin;
     private readonly int _year;
-    
-    public virtual void Display()
+
+    protected virtual void Display()
     {
         Console.WriteLine($"Машина: {Brand} {Name}, Цвет: {Color}, Год: {Year}, VIN: {Vin}");
     }

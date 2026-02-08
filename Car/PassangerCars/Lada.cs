@@ -4,7 +4,8 @@ public class Lada(string name,string color,string vin,int year):PassangerCar(nam
 {
     private new const string Brand = "Lada";
     public override double GetParkingFee() => 0;
-    public override void Display()
+
+    protected override void Display()
     {
         Console.WriteLine($"Вы добавили машину {Brand}:\"{Name}\",{Color} цвета, {Year} года!");
     }

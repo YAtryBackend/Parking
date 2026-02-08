@@ -4,7 +4,7 @@ public class Renault(string name,string color,string vin,int year):PassangerCar(
 {
     private new const string Brand = "Renault";
 
-    public override void Display()
+    protected override void Display()
     {
         Console.WriteLine($"Вы добавили машину {Brand}:\"{Name}\",{Color} цвета, {Year} года!");
     }

@@ -1,6 +1,6 @@
 namespace FirstOOPProject;
 
-public class ICar
+public interface ICar
 {
-    
+    public string Brand { get;}
 }
