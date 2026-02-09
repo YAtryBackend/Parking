@@ -2,15 +2,15 @@ namespace FirstOOPProject;
 
 public static class ParkingRules
 {
-    public static bool CanParkInZone(Car car, string spotType)
+    public static bool CanParkInZone(Car car, Zone spotType)
     {
         return (spotType, car) switch
         {
-            ("Truck", Truck) => true,
-            ("Truck", PassangerCar) => false,
-            ("B", Truck) => false,
-            ("VIP", LuxuryCar) => true,
-            ("VIP", _) => false,
+            (Zone.Truck, Truck) => true,
+            (Zone.Truck, PassangerCar) => false,
+            (Zone.B, Truck) => false,
+            (Zone.Vip, LuxuryCar) => true,
+            (Zone.Vip, _) => false,
             
             _ => true //бычные зоны
         };
@@ -19,9 +19,9 @@ public static class ParkingRules
     {
         return car switch
         {
-            LuxuryCar => "VIP",
-            Truck => "Truck",
-            _ => "A"
+            LuxuryCar => nameof(Zone.Vip),
+            Truck => nameof(Zone.Truck),
+            _ => nameof(Zone.A)
         };
     }
 }

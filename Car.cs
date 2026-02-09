@@ -1,6 +1,6 @@
 namespace FirstOOPProject;
 
-public abstract class Car:ICar // класс отвечает за реализацию машины
+public abstract class Car
 {
     public abstract string Brand { get; }
     

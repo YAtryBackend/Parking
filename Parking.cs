@@ -77,7 +77,7 @@ public class Parking
         
         var spot = _parkingSpots.FirstOrDefault(s =>
             !s.IsOccupied &&
-            s.SpotType == preferredZone &&
+            nameof(s.SpotType) == preferredZone &&
             ParkingRules.CanParkInZone(car, s.SpotType)
         ) ?? _parkingSpots.FirstOrDefault(s =>
             !s.IsOccupied &&
@@ -157,7 +157,8 @@ public class Parking
 
     public List<ParkingSpot> GetFreeSpotsByZone(string zone)
     {
-        return _parkingSpots.Where(s => !s.IsOccupied && s.SpotType == zone).ToList();
+        Zone newZone = Enum.TryParse<Zone>(zone, true, out var zoneEnum) ? zoneEnum : throw new ArgumentNullException(nameof(zone));
+        return _parkingSpots.Where(s => !s.IsOccupied && s.SpotType == newZone).ToList();
     }
 }
 

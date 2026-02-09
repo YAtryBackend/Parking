@@ -1,6 +1,6 @@
 namespace FirstOOPProject.Trucks;
 
-public class Камаз(string name,string color,string vin,int year):Truck(name,color,vin,year)
+public class Kamaz(string name,string color,string vin,int year):Truck(name,color,vin,year)
 {
     private new const string Brand = "Камаз";
 

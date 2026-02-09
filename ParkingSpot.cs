@@ -1,9 +1,23 @@
 namespace FirstOOPProject;
 
-public class ParkingSpot(string spotType, int spotNumber) // класс отвечает за парковочное место
+public class ParkingSpot
 {
-    public string SpotType{get;} = spotType.ToUpper(); //A,B,VIP,TRUCK
-    public int SpotNumber{get;} = spotNumber;
+    
+
+    public ParkingSpot(string spotType, int spotNumber)
+    {
+        SpotNumber = spotNumber;
+        if (Enum.TryParse<Zone>(spotType, true, out var zone))
+        {
+            SpotType =  zone;
+        }
+        else
+        {
+            throw new ArgumentException($"Unknown spot type {spotType}");
+        }
+    }
+    public Zone SpotType{get;} //A,B,VIP,TRUCK
+    public int SpotNumber{get;}
     public bool IsOccupied=>Car!=null;
     private Car? Car { get; set; }
     public DateTime? OccupiedSince { get; private set; }
@@ -30,7 +44,7 @@ public class ParkingSpot(string spotType, int spotNumber) // класс отве
         
         var hours = (DateTime.Now - OccupiedSince.Value).TotalHours;
         var baseRate = Car?.GetParkingFee() ?? 0;
-        if (SpotType == "VIP") baseRate *= 1.5;
+        if (SpotType == Zone.Vip) baseRate *= 1.5;
         
         return baseRate * Math.Ceiling(hours);
     }

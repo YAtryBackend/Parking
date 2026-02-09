@@ -3,23 +3,25 @@ using FirstOOPProject.Trucks;
 
 namespace FirstOOPProject;
 
-public enum PassangerBrands
-{
-    Mersedes,
-    Porshe,
-    RolsRoyce,
-    Lada,
-    Renault
-}
-public enum TruckBrands
-{
-    Mersedes,
-    Man,
-    Камаз
-}
+
 
 public class ParkingActions(Parking parking)
 {
+    private enum PassangerBrands
+    {
+        Mersedes,
+        Porshe,
+        RolsRoyce,
+        Lada,
+        Renault
+    }
+
+    private enum TruckBrands
+    {
+        Mersedes,
+        Man,
+        Kamaz
+    }
     public void ShowMenu()
     {
         while (true)
@@ -52,7 +54,6 @@ public class ParkingActions(Parking parking)
                     break;
                 case "4":
                     parking.DisplayParkingStatus();
-                    WaitForContinue();
                     break;
                 case "5":
                     FindCarsByBrandAction();
@@ -62,15 +63,14 @@ public class ParkingActions(Parking parking)
                     break;
                 case "7":
                     Console.WriteLine($"Общая выручка: {parking.CalculateTotalRevenue():C}");
-                    WaitForContinue();
                     break;
                 case "8":
                     return;
                 default:
                     Console.WriteLine("Неверный выбор");
-                    WaitForContinue();
                     break;
             }
+            WaitForContinue();
         }
     }
     
@@ -78,7 +78,7 @@ public class ParkingActions(Parking parking)
     {
         Console.WriteLine("\n    ПАРКОВКА МАШИНЫ    ");
         
-        Console.Write("Тип машины (1-Пасажирская, 2-Грузовик): ");
+        Console.Write("Тип машины (1-Паcсажирская, 2-Грузовик): ");
         var typeChoice = Console.ReadLine();
 
         ICar? car = null;
@@ -125,7 +125,6 @@ public class ParkingActions(Parking parking)
         
         var result = parking.ParkCar(car as Car ?? throw new InvalidOperationException());
         Console.WriteLine(result.Message);
-        WaitForContinue();
     }
 
     private ICar CreateCar(PassangerBrands type, string name, string color, string vin, int year) => type switch
@@ -141,7 +140,7 @@ public class ParkingActions(Parking parking)
     {
         TruckBrands.Man => new Man(name, color, vin, year),
         TruckBrands.Mersedes => new MersedesBenz(name, color, vin, year),
-        TruckBrands.Камаз => new Камаз(name, color, vin, year),
+        TruckBrands.Kamaz => new Kamaz(name, color, vin, year),
         _ => throw new ArgumentException()
     };
     private void RemoveCarAction()
@@ -158,7 +157,6 @@ public class ParkingActions(Parking parking)
             }
         }
 
-        WaitForContinue();
     }
     
     private void FindCarByVinAction()
@@ -184,7 +182,6 @@ public class ParkingActions(Parking parking)
             }
         }
 
-        WaitForContinue();
     }
     
     private void FindCarsByBrandAction()
@@ -210,7 +207,6 @@ public class ParkingActions(Parking parking)
             }
         }
 
-        WaitForContinue();
     }
     
     private void ShowFreeSpotsAction()
@@ -236,7 +232,6 @@ public class ParkingActions(Parking parking)
             }
         }
 
-        WaitForContinue();
     }
     
     private static void WaitForContinue()
